@@ -1,0 +1,14 @@
+.app-container {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  gap: 20px;
+}
+.todo-list-container,
+.scheduler-container {
+  flex: 1;
+  background-color: #cfcfcf;
+  padding: 20px;
+  border-radius: 8px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}

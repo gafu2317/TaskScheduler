@@ -1,10 +1,17 @@
-import TodoList from './Components/TodoList';
+import TodoList from "./Components/TodoList/TodoList";
+import Scheduler from "./Components/Scheduler/Scheduler";
+import "./App.css";
 
 const App = () => {
   return (
-    <>
-      <TodoList/>
-    </>
+    <div className="app-container">
+      <div className="todo-list-container">
+        <TodoList />
+      </div>
+      <div className="scheduler-container">
+        <Scheduler />
+      </div>
+    </div>
   );
 };
 

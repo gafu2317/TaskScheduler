@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 
-const MAX_TASK_LENGTH = 500;
+const MAX_TASK_LENGTH = 50;
 
 const TodoForm: React.FC<{ onAddTask: (task: string) => void }> = ({
   onAddTask,
