@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
 
 const MAX_TASK_LENGTH = 50;
 
@@ -8,6 +8,10 @@ const TodoForm: React.FC<{ onAddTask: (task: string) => void }> = ({
   const [task, setTask] = useState<string>("");
   const [error, setError] = useState<string | null>(null);
   const [showError, setShowError] = useState(false);
+  const inputRef = useRef<HTMLInputElement>(null);
+  const handleClick = () => {
+    inputRef.current?.focus();
+  };
 
   useEffect(() => {
     let timeoutId: ReturnType<typeof setTimeout> | null = null;
@@ -53,11 +57,12 @@ const TodoForm: React.FC<{ onAddTask: (task: string) => void }> = ({
     <div>
       <form onSubmit={handleSubmit}>
         <input
+          ref={inputRef}
           type="text"
           value={task}
           onChange={(e) => setTask(e.target.value)}
         />
-        <input type="submit" value="追加" />
+        <input type="submit" value="追加" onClick={handleClick}/>
         {showError && <p style={{ color: "red" }}>{error}</p>}
       </form>
     </div>

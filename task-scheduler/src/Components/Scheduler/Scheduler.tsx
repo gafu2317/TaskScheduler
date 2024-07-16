@@ -5,7 +5,7 @@ const scheduler = () => {
     <div>
       <h2>24時間スケジュール</h2>
       <div>
-        <ul>1:00</ul>
+        {/* <ul>1:00</ul>
         <ul>2:00</ul>
         <ul>3:00</ul>
         <ul>4:00</ul>
@@ -28,7 +28,7 @@ const scheduler = () => {
         <ul>21:00</ul>
         <ul>22:00</ul>
         <ul>23:00</ul>
-        <ul>24:00</ul>
+        <ul>24:00</ul> */}
       </div>
     </div>
   );
