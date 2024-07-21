@@ -3,46 +3,43 @@ import Scheduler from "./Components/Scheduler/Scheduler";
 import "./App.css";
 import { useState } from "react";
 import { DndContext } from "@dnd-kit/core";
-import { Box, Stack } from "@mui/material";
-import { Draggable } from "./Components/test/Draggable";
-import { Droppable } from "./Components/test/Droppable";
+
+interface DragData {
+  task: string;
+}
 
 const App = () => {
-    const [dropCount, setDropCount] = useState(0);
+  const [droppedTasks, setDroppedTasks] = useState<Array<string | null>>(
+    Array(24).fill(null)
+  );
+
+  const handleDrop = (index: number, task: string) => {
+    const newDroppedTasks = [...droppedTasks];
+    newDroppedTasks[index] = task;
+    setDroppedTasks(newDroppedTasks);
+  };
+
   return (
-    <div className="app-container">
-      <Box
-        sx={{
-          p: 2,
+    <div className="flex ">
+      <DndContext
+        onDragEnd={(event) => {
+          const { over, active } = event;
+          if (over == null) {
+            return;
+          }
+          const data = active.data.current as DragData; // 型を指定
+          const { task } = data;
+          const hourIndex = parseInt(over.id as string, 10); //10は10進数の10
+          handleDrop(hourIndex, task);
         }}
       >
-        <DndContext
-          onDragEnd={(event) => {
-            const { over } = event;
-            if (over == null) {
-              return;
-            }
-            setDropCount((x) => x + 1);
-          }}
-        >
-          <Box
-            sx={{
-              mb: 5,
-            }}
-          >
-            <Draggable id="draggableA" label="ドラッグブロック" />
-          </Box>
-          <Droppable id="dropAreaA">{dropCount}回ドロップしたぜ</Droppable>
-        </DndContext>
-      </Box>
-      {/* <div className="todo-list-container">
+        <div className="bg-gray-300 m-3 rounded-md p-4 flex-grow w-full">
           <TodoList />
         </div>
-        <div className="scheduler-container">
-          <Scheduler id="dropArea">
-            ここにタスクをドロップしてください
-          </Scheduler>
-        </div> */}
+        <div className="bg-gray-300 m-3 rounded-md p-4 flex-grow w-full">
+          <Scheduler droppedTasks={droppedTasks} />
+        </div>
+      </DndContext>
     </div>
   );
 };

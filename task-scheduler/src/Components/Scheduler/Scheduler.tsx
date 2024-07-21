@@ -1,24 +1,22 @@
-import { useDroppable } from "@dnd-kit/core";
 import { FC, ReactNode } from "react";
+import HourBlock from "./HourBlock";
 
 type DroppableProp = {
-  children: ReactNode;
-  id: string;
+  droppedTasks: Array<string | null>;
 };
 
-const Scheduler: FC<DroppableProp> = ({ children, id }) => {
-  // const { setNodeRef, isOver } = useDroppable({
-  //   id,
-  // });
-
+const Scheduler: FC<DroppableProp> = ({ droppedTasks }) => {
   return (
-    <div
-      // ref={setNodeRef}
-      // style={{
-      //   backgroundColor: isOver ? "lightblue" : "undifined",
-      // }}
-    >
-      {children}
+    <div className="flex flex-col">
+      {Array.from({ length: 24 }).map((_, index) => (
+        <div
+          key={index}
+          className="flex border border-black p-2 rounded-md"
+        >
+          {index}
+          <HourBlock id={`${index}`} droppedTask={droppedTasks[index]} />
+        </div>
+      ))}
     </div>
   );
 };

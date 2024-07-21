@@ -55,15 +55,22 @@ const TodoForm: React.FC<{ onAddTask: (task: string) => void }> = ({
 
   return (
     <div>
-      <form onSubmit={handleSubmit}>
+      <p>新規タスク追加</p>
+      <form onSubmit={handleSubmit} className="m-2">
         <input
           ref={inputRef}
           type="text"
           value={task}
           onChange={(e) => setTask(e.target.value)}
+          className="border border-gray-300 rounded-md"
         />
-        <input type="submit" value="追加" onClick={handleClick}/>
-        {showError && <p style={{ color: "red" }}>{error}</p>}
+        <input
+          type="submit"
+          value="追加"
+          onClick={handleClick}
+          className="border border-black rounded-md bg-blue-400 text-white px-2 ml-2"
+        />
+        {showError && <p className="text-red-500">{error}</p>}
       </form>
     </div>
   );

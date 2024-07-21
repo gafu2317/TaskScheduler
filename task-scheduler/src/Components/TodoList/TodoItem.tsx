@@ -1,30 +1,63 @@
 // TodoItem.tsx
 import React from "react";
-import "./todo.css";
+import { useDraggable } from "@dnd-kit/core";
 
 const TodoItem: React.FC<{
   task: string;
   isCompleted: boolean;
-  onSetCompleted: () => void;
-  onDelete?: () => void; //onDeleteが指定されている場合は関数型を返す
-}> = ({ task, isCompleted, onSetCompleted, onDelete }) => {
+  // onSetCompleted: (event: React.ChangeEvent<HTMLInputElement>) => void;
+  onDelete?: () => void;
+  id: string;
+}> = ({
+  task,
+  isCompleted,
+  // onSetCompleted,
+  onDelete,
+  id,
+}) => {
+  const { setNodeRef, listeners, attributes, transform, isDragging } =
+    useDraggable({
+      id,
+      data: {
+        task: task,
+      },
+    });
+
+  const transformStyle = transform
+    ? `translate(${transform.x}px, ${transform.y}px)`
+    : undefined;
+
   return (
     <div className="item-container ">
-      <ul className="todo-ul">
+      <div
+        ref={setNodeRef}
+        {...attributes}
+        {...listeners}
+        style={{
+          transform: transformStyle,
+          height: "fit-content",
+        }}
+      >
         <input
           type="checkbox"
           checked={isCompleted}
-          onChange={onSetCompleted}
+          // onChange={(event) => {
+          //   console.log("Checkbox changed");
+          //   onSetCompleted(event);
+          // }}
         />
-        <span style={{ textDecoration: isCompleted ? "line-through" : "none" }}>
+        <span
+          style={{
+            textDecoration: isCompleted ? "line-through" : "none",
+            userSelect: "none",
+            cursor: isDragging ? "grabbing" : "grab",
+            opacity: isDragging ? 0.5 : undefined,
+          }}
+        >
           {task}
         </span>
-      </ul>
-      {onDelete && (
-        <button className="delete-button" onClick={onDelete}>
-          削除
-        </button>
-      )}
+      </div>
+      {/* {onDelete && <button onClick={onDelete}>削除</button>} */}
     </div>
   );
 };

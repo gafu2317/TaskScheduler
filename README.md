@@ -15,6 +15,7 @@
 - Vite
 - React
 - TypeScript
+- Tailwind CSS
 
 ## インストール方法
 
@@ -27,3 +28,5 @@ npm install
 ```bash
 npm run dev
 ```
+
+## 作成したきっかけ

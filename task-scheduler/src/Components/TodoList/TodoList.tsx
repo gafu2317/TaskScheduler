@@ -1,14 +1,17 @@
 // TodoList.tsx
-import React, { useState } from "react";
+import React, { FC, useState, useEffect } from "react";
 import TodoForm from "./TodoForm";
 import TodoItem from "./TodoItem";
-import "./todo.css";
 
 const TodoList = () => {
   const [tasks, setTasks] = useState<
     { id: string; task: string; isCompleted: boolean }[]
   >([]);
   const [showCompletedTasks, setShowCompletedTasks] = useState(false);
+
+  useEffect(() => {
+    console.log("Tasks have been updated:", tasks);
+  }, [tasks]);
 
   const addTask = (newTask: string) => {
     setTasks([
@@ -17,55 +20,63 @@ const TodoList = () => {
     ]);
   };
 
-  const setCompleted = (id: string) => {
-    setTasks(
-      tasks.map((task) =>
-        task.id === id ? { ...task, isCompleted: !task.isCompleted } : task
-      )
-    );
-  };
+  // const setCompleted = (id: string) => {
+  //   console.log("do setCompleted");
+  //   setTasks(
+  //     tasks.map((task) =>
+  //       task.id === id ? { ...task, isCompleted: !task.isCompleted } : task
+  //     )
+  //   );
+  //   console.log("do setTasks");
+  // };
 
-  const deleteCompletedTask = (id: string) => {
-    setTasks(tasks.filter((task) => task.id !== id));
-  };
+  // const deleteCompletedTask = (id: string) => {
+  //   setTasks(tasks.filter((task) => task.id !== id));
+  // };
 
-  const incompleteTasks = tasks.filter((task) => !task.isCompleted);
-  const completedTasks = tasks.filter((task) => task.isCompleted);
+  // const incompleteTasks = tasks.filter((task) => !task.isCompleted);
+  // const completedTasks = tasks.filter((task) => task.isCompleted);
+
 
   return (
     <div>
-      <h1 className="todolist-title">Todoリスト</h1>
-      <div className="todolist-container">
+      <p className="text-center text-lg">Todoリスト</p>
+      <div>
         <TodoForm onAddTask={addTask} />
-        <h2>未完了のタスク</h2>
-        <ul className="todo-ul">
-          {incompleteTasks.map((task) => (
+        <p>未完了のタスク</p>
+        <div>
+          {tasks.map((task) => (//変更した
             <TodoItem
               key={task.id}
+              id={task.id}
               task={task.task}
               isCompleted={task.isCompleted}
-              onSetCompleted={() => setCompleted(task.id)}
+              // onSetCompleted={() => setCompleted(task.id)}
             />
           ))}
-        </ul>
-        <button onClick={() => setShowCompletedTasks(!showCompletedTasks)}>
+        </div>
+        {/* <button
+          onClick={() => setShowCompletedTasks(!showCompletedTasks)}
+          className="border border-black p-1 rounded-md bg-gray-100 mt-2"
+        >
           {showCompletedTasks
             ? "完了したタスクを隠す"
             : "完了したタスクを表示する"}
         </button>
         {showCompletedTasks && (
-          <ul className="todo-ul">
+          <div>
             {completedTasks.map((task) => (
               <TodoItem
                 key={task.id}
+                id={task.id}
                 task={task.task}
                 isCompleted={task.isCompleted}
                 onSetCompleted={() => setCompleted(task.id)}
                 onDelete={() => deleteCompletedTask(task.id)}
               />
             ))}
-          </ul>
-        )}
+          </div>
+        )} */}
       </div>
     </div>
   );
