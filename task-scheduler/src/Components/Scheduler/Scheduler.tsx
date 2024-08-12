@@ -1,5 +1,5 @@
 //Scheduler.tsx
-import { FC, ReactNode } from "react";
+import { FC} from "react";
 import HourBlock from "./HourBlock";
 
 type DroppableProp = {

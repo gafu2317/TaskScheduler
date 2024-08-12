@@ -1,5 +1,5 @@
 // TodoList.tsx
-import React, { FC, useState, useEffect } from "react";
+import { useState, useEffect } from "react";
 import TodoForm from "./TodoForm";
 import TodoItem from "./TodoItem";
 
@@ -19,9 +19,9 @@ const TodoList = () => {
     ]);
   };
 
-  const deleteTask = (id: string) => {
-    setTasks(tasks.filter((task) => task.id !== id));
-  }
+  // const deleteTask = (id: string) => {
+  //   setTasks(tasks.filter((task) => task.id !== id));
+  // }
 
   return (
     <div>
