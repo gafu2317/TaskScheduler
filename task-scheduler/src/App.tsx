@@ -1,3 +1,4 @@
+//App.tsx
 import TodoList from "./Components/TodoList/TodoList";
 import Scheduler from "./Components/Scheduler/Scheduler";
 import "./App.css";

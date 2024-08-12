@@ -1,4 +1,4 @@
-import { useDndMonitor, useDroppable } from "@dnd-kit/core";
+import { useDraggable, useDroppable } from "@dnd-kit/core";
 import { FC } from "react";
 
 type DroppableProp = {
@@ -18,7 +18,6 @@ const HourBlock: FC<DroppableProp> = ({ id, droppedTask }) => {
         isOver ? "bg-lightblue" : "bg-transparent"
       }`}
     >
-      :00
       {droppedTask && <div className="ml-2 ">{droppedTask}</div>}
     </div>
   );

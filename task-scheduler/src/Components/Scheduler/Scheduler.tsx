@@ -1,3 +1,4 @@
+//Scheduler.tsx
 import { FC, ReactNode } from "react";
 import HourBlock from "./HourBlock";
 
@@ -13,7 +14,7 @@ const Scheduler: FC<DroppableProp> = ({ droppedTasks }) => {
           key={index}
           className="flex border border-black p-2 rounded-md"
         >
-          {index}
+          {index}:00
           <HourBlock id={`${index}`} droppedTask={droppedTasks[index]} />
         </div>
       ))}

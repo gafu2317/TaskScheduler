@@ -4,17 +4,9 @@ import { useDraggable } from "@dnd-kit/core";
 
 const TodoItem: React.FC<{
   task: string;
-  isCompleted: boolean;
-  // onSetCompleted: (event: React.ChangeEvent<HTMLInputElement>) => void;
-  onDelete?: () => void;
+  isCompleted?: boolean;
   id: string;
-}> = ({
-  task,
-  isCompleted,
-  // onSetCompleted,
-  onDelete,
-  id,
-}) => {
+}> = ({ task, isCompleted,id }) => {
   const { setNodeRef, listeners, attributes, transform, isDragging } =
     useDraggable({
       id,
@@ -28,7 +20,7 @@ const TodoItem: React.FC<{
     : undefined;
 
   return (
-    <div className="item-container ">
+    <div className="p-1">
       <div
         ref={setNodeRef}
         {...attributes}
@@ -38,15 +30,8 @@ const TodoItem: React.FC<{
           height: "fit-content",
         }}
       >
-        <input
-          type="checkbox"
-          checked={isCompleted}
-          // onChange={(event) => {
-          //   console.log("Checkbox changed");
-          //   onSetCompleted(event);
-          // }}
-        />
         <span
+          className="rounded border border-black bg-gray-200 p-1"
           style={{
             textDecoration: isCompleted ? "line-through" : "none",
             userSelect: "none",
@@ -57,9 +42,10 @@ const TodoItem: React.FC<{
           {task}
         </span>
       </div>
-      {/* {onDelete && <button onClick={onDelete}>削除</button>} */}
     </div>
   );
 };
 
 export default TodoItem;
+
+// 削除ボタン(チェックボタン)はtodoItemとは別にする
