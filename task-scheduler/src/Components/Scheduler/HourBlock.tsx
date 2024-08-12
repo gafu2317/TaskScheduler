@@ -3,7 +3,7 @@ import { FC } from "react";
 
 type DroppableProp = {
   id: string;
-  droppedTask: string | null;
+  droppedTask: React.ReactNode | null;
 };
 
 const HourBlock: FC<DroppableProp> = ({ id, droppedTask }) => {
@@ -18,7 +18,7 @@ const HourBlock: FC<DroppableProp> = ({ id, droppedTask }) => {
         isOver ? "bg-lightblue" : "bg-transparent"
       }`}
     >
-      {droppedTask && <div className="ml-2 ">{droppedTask}</div>}
+      {droppedTask && <div className="ml-2">{droppedTask}</div>}
     </div>
   );
 };

@@ -20,7 +20,7 @@ const TodoItem: React.FC<{
     : undefined;
 
   return (
-    <div className="p-1">
+    <div className="">
       <div
         ref={setNodeRef}
         {...attributes}

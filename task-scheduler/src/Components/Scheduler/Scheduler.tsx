@@ -3,7 +3,7 @@ import { FC, ReactNode } from "react";
 import HourBlock from "./HourBlock";
 
 type DroppableProp = {
-  droppedTasks: Array<string | null>;
+  droppedTasks: Array<React.ReactNode | null>;
 };
 
 const Scheduler: FC<DroppableProp> = ({ droppedTasks }) => {
