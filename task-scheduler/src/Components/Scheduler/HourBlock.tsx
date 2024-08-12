@@ -1,5 +1,7 @@
+// HourBlock.tsx
 import { useDroppable } from "@dnd-kit/core";
 import { FC } from "react";
+
 
 type DroppableProp = {
   id: string;
@@ -14,7 +16,7 @@ const HourBlock: FC<DroppableProp> = ({ id, droppedTask }) => {
   return (
     <div
       ref={setNodeRef}
-      className={`flex items-center w-full h-ful${
+      className={`flex items-center w-full h-ful ${
         isOver ? "bg-lightblue" : "bg-transparent"
       }`}
     >
