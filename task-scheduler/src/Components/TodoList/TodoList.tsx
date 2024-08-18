@@ -19,9 +19,9 @@ const TodoList = () => {
     ]);
   };
 
-  // const deleteTask = (id: string) => {
-  //   setTasks(tasks.filter((task) => task.id !== id));
-  // }
+  const handleDelete = (id: string) => {
+    setTasks(tasks.filter((task) => task.id !== id));
+  };
 
   return (
     <div>
@@ -36,6 +36,8 @@ const TodoList = () => {
               id={task.id}
               task={task.task}
               isCompleted={task.isCompleted}
+              onDelete={handleDelete}
+              showDeleteButton={false}
             />
           ))}
         </div>

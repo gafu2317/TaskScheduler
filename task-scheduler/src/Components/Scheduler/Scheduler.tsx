@@ -12,7 +12,7 @@ const Scheduler: FC<DroppableProp> = ({ droppedTasks }) => {
       {Array.from({ length: 24 }).map((_, index) => (
         <div
           key={index}
-          className="flex border border-black p-2 rounded-md"
+          className="flex border border-black p-2 rounded-md p-1"
         >
           {index}:00
           <HourBlock id={`${index}`} droppedTask={droppedTasks[index]} />

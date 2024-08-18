@@ -34,10 +34,19 @@ const App = () => {
         id={crypto.randomUUID()} // 新しいIDを生成
         task={taskData.task}
         isCompleted={taskData.isCompleted}
+        onDelete={handleDelete}
       />
     );
     setDroppedTasks(newDroppedTasks);
   };
+
+    const handleDelete = (id: string) => {
+      const newDroppedTasks = droppedTasks.map((task) =>
+        task && (task as any).props.id === id ? null : task
+      );
+      setDroppedTasks(newDroppedTasks);
+    };
+
 
   return (
     <div className="flex ">
