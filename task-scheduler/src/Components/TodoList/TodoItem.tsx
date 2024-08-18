@@ -6,12 +6,14 @@ const TodoItem: React.FC<{
   task: string;
   isCompleted?: boolean;
   id: string;
-}> = ({ task, isCompleted,id }) => {
+}> = ({ task, isCompleted , id }) => {
   const { setNodeRef, listeners, attributes, transform, isDragging } =
     useDraggable({
       id,
       data: {
-        task: task,
+        id,
+        task,
+        isCompleted,
       },
     });
 
@@ -20,32 +22,28 @@ const TodoItem: React.FC<{
     : undefined;
 
   return (
-    <div className="">
-      <div
-        ref={setNodeRef}
-        {...attributes}
-        {...listeners}
+    <div
+      ref={setNodeRef}
+      {...attributes}
+      {...listeners}
+      style={{
+        transform: transformStyle,
+        height: "fit-content",
+      }}
+    >
+      <span
+        className="rounded border border-black bg-gray-200 p-1"
         style={{
-          transform: transformStyle,
-          height: "fit-content",
+          textDecoration: isCompleted ? "line-through" : "none",
+          userSelect: "none",
+          cursor: isDragging ? "grabbing" : "grab",
+          opacity: isDragging ? 0.5 : undefined,
         }}
       >
-        <span
-          className="rounded border border-black bg-gray-200 p-1"
-          style={{
-            textDecoration: isCompleted ? "line-through" : "none",
-            userSelect: "none",
-            cursor: isDragging ? "grabbing" : "grab",
-            opacity: isDragging ? 0.5 : undefined,
-          }}
-        >
-          {task}
-        </span>
-      </div>
+        {task}
+      </span>
     </div>
   );
 };
 
 export default TodoItem;
-
-// 削除ボタン(チェックボタン)はtodoItemとは別にする

@@ -12,19 +12,26 @@ interface DragData {
   isCompleted: boolean;
 }
 
-
 const App = () => {
   const [droppedTasks, setDroppedTasks] = useState<
     Array<React.ReactNode | null>
   >(Array(24).fill(null));
 
-
   const handleDrop = (index: number, taskData: DragData) => {
     const newDroppedTasks = [...droppedTasks];
+    // 元の場所のタスクを削除
+    const originalIndex = droppedTasks.findIndex(
+      (task) => task && (task as any).props.id === taskData.id
+    );
+    if (originalIndex !== -1) {
+      newDroppedTasks[originalIndex] = null;
+    }
+
+    // 新しい場所にタスクを追加
     newDroppedTasks[index] = (
       <TodoItem
-        key={taskData.id}
-        id={taskData.id}
+        key={crypto.randomUUID()} // 新しいIDを生成
+        id={crypto.randomUUID()} // 新しいIDを生成
         task={taskData.task}
         isCompleted={taskData.isCompleted}
       />
